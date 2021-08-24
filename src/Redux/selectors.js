@@ -1,7 +1,7 @@
 //Main Widget
 
 export const getInfoForWidget = (state) => {
-  const { weather, main, sys, name, wind, visibility } = state.widget;
+  const { weather, main, sys, name, wind, visibility, timezone } = state.widget;
 
   if (!weather) {
     return;
@@ -19,13 +19,20 @@ export const getInfoForWidget = (state) => {
   const calculatedVisibility = Math.round(visibility / 1000);
 
   function convertTime(time) {
-    const milliseconds = time * 1000;
+    const milliseconds = (time + timezone) * 1000;
     const dateObject = new Date(milliseconds);
-    const humanDateFormat = dateObject.toLocaleTimeString("en-US", {
-      hour: "numeric",
-      minute: "numeric",
-    });
-    return humanDateFormat;
+
+    const hours = dateObject.getUTCHours();
+    const minutes = dateObject.getUTCMinutes();
+    const formattedTime = `${pad(hours)}:${pad(minutes)}`;
+    return formattedTime;
+  }
+
+  function pad(measure) {
+    if (measure < 10) {
+      return "0" + measure;
+    }
+    return measure;
   }
 
   return {
@@ -52,7 +59,7 @@ export const getInfoForWidgetByLocation = (state, name) => {
     return;
   }
 
-  const { weather, main, sys, cityName } = data;
+  const { weather, main, sys, cityName, timezone } = data;
 
   const location = cityName;
   const image = `https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
@@ -61,15 +68,21 @@ export const getInfoForWidgetByLocation = (state, name) => {
   const humidity = main.humidity;
   const sunrise = convertTime(sys.sunrise);
   const sunset = convertTime(sys.sunset);
-
   function convertTime(time) {
-    const milliseconds = time * 1000;
+    const milliseconds = (time + timezone) * 1000;
     const dateObject = new Date(milliseconds);
-    const humanDateFormat = dateObject.toLocaleTimeString("en-US", {
-      hour: "numeric",
-      minute: "numeric",
-    });
-    return humanDateFormat;
+
+    const hours = dateObject.getUTCHours();
+    const minutes = dateObject.getUTCMinutes();
+    const formattedTime = `${pad(hours)}:${pad(minutes)}`;
+    return formattedTime;
+  }
+
+  function pad(measure) {
+    if (measure < 10) {
+      return "0" + measure;
+    }
+    return measure;
   }
 
   return {

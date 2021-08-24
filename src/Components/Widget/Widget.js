@@ -1,4 +1,7 @@
 import React, { useEffect } from "react";
+import Moment from "react-moment";
+import "moment-timezone";
+
 import {
   WiThermometerExterior,
   WiSunrise,
@@ -48,10 +51,13 @@ export default function Widget({ city }) {
           <Info>
             <WiSunrise />
             Sunrise: {widgetData.sunrise}
+            {/* <Moment unix local="true">
+              {widgetData.sunrise}
+            </Moment> */}
           </Info>
           <Info>
-            <WiSunset />
-            Sunset: {widgetData.sunset}
+            <WiSunset /> Sunset: {widgetData.sunset}
+            {/*  <Moment unix>{widgetData.sunset}</Moment> */}
           </Info>
         </>
       )}
