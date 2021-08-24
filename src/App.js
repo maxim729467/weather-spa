@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+
+import Container from "Components/Container";
+import NavBar from "Components/NavBar";
+import DefaultWidget from "Components/DefaultWidget";
+import Form from "Components/Form";
+import LocationsList from "Components/LocationsList";
+import Wrapper from "Components/Wrapper";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <NavBar />
+      <Switch>
+        <Route exact path="/">
+          <Wrapper>
+            <DefaultWidget />
+          </Wrapper>
+        </Route>
+        <Route exact path="/cities">
+          <Wrapper>
+            <Form />
+            <LocationsList />
+          </Wrapper>
+        </Route>
+        <Redirect to="/" />
+      </Switch>
+    </Container>
   );
 }
 
