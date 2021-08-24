@@ -9,3 +9,5 @@ export const removeLocation = createAction("weather/removeCity");
 export const addLocationsFromLocalStorage = createAction(
   "weather/addFromStorage"
 );
+export const setBlockNotice = createAction("weather/setBlockNotice");
+export const unsetBlockNotice = createAction("weather/unsetBlockNotice");

@@ -39,10 +39,16 @@ const savedLocationReducer = createReducer([], {
   [actions.addLocationsFromLocalStorage]: (_, { payload }) => [...payload],
 });
 
+const locationBlockReducer = createReducer(false, {
+  [actions.setBlockNotice]: () => true,
+  [actions.unsetBlockNotice]: () => false,
+});
+
 export const reducer = combineReducers({
   cities: weatherDataReducer,
   isLoading: loadingReducer,
   error: errorReducer,
   widget: widgetReducer,
   savedLocations: savedLocationReducer,
+  locationBlock: locationBlockReducer,
 });

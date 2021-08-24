@@ -6,6 +6,7 @@ export const BASE_URL = "https://api.openweathermap.org/data/2.5/weather?";
 
 export const getWeatherByLocation = () => (dispatch) => {
   const getGeo = ({ coords }) => {
+    dispatch(actions.unsetBlockNotice());
     dispatch(actions.getWeatherDataRequest());
     axios
       .get(
@@ -19,7 +20,11 @@ export const getWeatherByLocation = () => (dispatch) => {
       });
   };
 
-  navigator.geolocation.getCurrentPosition(getGeo);
+  const onErrorHandler = () => {
+    dispatch(actions.setBlockNotice());
+  };
+
+  navigator.geolocation.getCurrentPosition(getGeo, onErrorHandler);
 };
 
 export const getWeatherByCityName = (city) => (dispatch) => {

@@ -71,3 +71,8 @@ export const Info = styled.p`
   align-items: center;
   justify-content: center;
 `;
+
+export const BlockNotice = styled.p`
+  font-size: 25px;
+  margin-left: 10px;
+`;

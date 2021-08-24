@@ -7,6 +7,7 @@ const initialState = {
   error: null,
   widget: {},
   savedLocations: [],
+  locationBlock: false,
 };
 
 export default configureStore({

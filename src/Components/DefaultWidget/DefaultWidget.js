@@ -6,6 +6,7 @@ import {
   WiSunset,
   WiHumidity,
 } from "react-icons/wi";
+import { BiCookie } from "react-icons/bi";
 import { FiWifiOff } from "react-icons/fi";
 import { FaBinoculars } from "react-icons/fa";
 import { MdLocationOn } from "react-icons/md";
@@ -19,9 +20,15 @@ import {
   Description,
   LeftBlock,
   RightBlock,
+  BlockNotice,
 } from "./DefaultWidget.styles";
 import { getWeatherByLocation } from "Services/api";
-import { getInfoForWidget, getLoader, getError } from "Redux/selectors";
+import {
+  getInfoForWidget,
+  getLoader,
+  getError,
+  getBlockNotice,
+} from "Redux/selectors";
 
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
@@ -43,6 +50,7 @@ export default function Widget() {
 
   const widget = getInfoForWidget(state);
   const isLoading = getLoader(state);
+  const block = getBlockNotice(state);
 
   return (
     <Section>
@@ -97,6 +105,15 @@ export default function Widget() {
             height: "100px",
           }}
         />
+      )}
+      {block && (
+        <>
+          <BiCookie style={{ height: "40px", width: "40px" }} />
+          <BlockNotice>
+            Allow your location in the settings to see the forecast for your
+            current position
+          </BlockNotice>
+        </>
       )}
     </Section>
   );

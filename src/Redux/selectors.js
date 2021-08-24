@@ -85,3 +85,4 @@ export const getInfoForWidgetByLocation = (state, name) => {
 
 export const getError = (state) => state.error;
 export const getLoader = (state) => state.isLoading;
+export const getBlockNotice = (state) => state.locationBlock;
